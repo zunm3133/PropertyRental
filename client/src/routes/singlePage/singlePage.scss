@@ -1,0 +1,336 @@
+@import "../../responsive.scss";
+
+$primary-blue: #2563eb;
+$dark-text: #1e293b;
+$light-text: #64748b;
+$light-bg: #f8fafc;
+$card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+.singlePage {
+  display: flex;
+  height: 100%;
+  background-color: white;
+
+  @include md {
+    flex-direction: column;
+    overflow: auto;
+  }
+
+  .custom-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); 
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10000; 
+
+    .custom-modal {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      min-width: 320px;
+      max-width: 400px;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      p {
+        font-size: 16px; color: #333; margin-bottom: 25px;
+        font-weight: 500; line-height: 1.5; white-space: pre-wrap;
+      }
+
+      .modal-actions {
+        display: flex; gap: 15px; justify-content: center;
+
+        button {
+          padding: 10px 24px; font-size: 15px; font-weight: bold;
+          border-radius: 8px; border: none; cursor: pointer;
+          transition: background-color 0.2s;
+
+          &.ok-btn, &.confirm-btn {
+            background-color: $primary-blue; color: white;
+            &:hover { background-color: darken($primary-blue, 10%); }
+          }
+
+          &.cancel-btn {
+            background-color: #f1f5f9; color: $dark-text;
+            &:hover { background-color: #e2e8f0; }
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .details {
+    flex: 3;
+    height: 100%;
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar { display: none; }
+    -ms-overflow-style: none; scrollbar-width: none;
+
+    .wrapper {
+      padding: 20px 40px;
+      @include md { padding: 20px; }
+
+      .slider {
+        width: 100vw; height: 100vh;
+        position: fixed; top: 0; left: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 9999;
+        display: flex; justify-content: center; align-items: center;
+
+        .fullSlider {
+          width: 100%; height: 100%;
+          display: flex; align-items: center; justify-content: center;
+
+          .arrow {
+            flex: 1; display: flex; justify-content: center; cursor: pointer;
+            img { width: 50px; opacity: 0.7; &:hover { opacity: 1; }}
+            .right { transform: rotate(180deg); }
+          }
+          .imgContainer {
+            flex: 10; height: 100%; display: flex; justify-content: center; align-items: center;
+            img { max-width: 90%; max-height: 90vh; object-fit: contain; }
+          }
+          .close {
+            position: absolute; top: 30px; right: 30px;
+            font-size: 40px; color: white; cursor: pointer;
+          }
+        }
+      }
+
+      .images {
+        display: flex; gap: 15px; height: 400px;
+        margin-bottom: 30px;
+
+        @include sm { height: 300px; }
+
+        .bigImage {
+          flex: 2; border-radius: 16px; overflow: hidden; cursor: pointer;
+          img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+          &:hover img { transform: scale(1.05); }
+        }
+
+        .smallImages {
+          flex: 1; display: flex; flex-direction: column; gap: 15px;
+
+          .smallImageWrapper {
+            flex: 1; position: relative; border-radius: 16px; overflow: hidden; cursor: pointer;
+            img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+            &:hover img { transform: scale(1.05); }
+
+            .overlay {
+              position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+              background: rgba(0, 0, 0, 0.6); color: white;
+              display: flex; align-items: center; justify-content: center;
+              font-size: 24px; font-weight: 700;
+            }
+          }
+        }
+      }
+
+      .info {
+        .top {
+          display: flex; justify-content: space-between; align-items: flex-start;
+          
+          @include sm { flex-direction: column; gap: 20px; }
+
+          .post {
+            display: flex; flex-direction: column; gap: 10px;
+            h1 { font-size: 32px; font-weight: 800; color: $dark-text; line-height: 1.2; }
+            
+            .address {
+              display: flex; gap: 8px; align-items: center; color: $light-text; font-size: 16px;
+              img { width: 18px; opacity: 0.6; }
+            }
+
+            .price-container {
+              display: flex; align-items: center; gap: 15px; margin-top: 10px;
+
+              .price-tag {
+                font-size: 24px; font-weight: 700; color: $primary-blue;
+                background: #eff6ff; padding: 8px 16px; border-radius: 8px;
+              }
+
+              .status-badge {
+                font-size: 12px; font-weight: 700; padding: 6px 12px;
+                border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+
+                &.rented {
+                  background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca;
+                }
+                &.available {
+                  background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0;
+                }
+              }
+            }
+          }
+
+          .user-card {
+            display: flex; align-items: center; gap: 15px;
+            padding: 15px 25px; border-radius: 16px;
+            background: white; border: 1px solid #e2e8f0;
+            box-shadow: $card-shadow;
+
+            img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; }
+            .user-details {
+              display: flex; flex-direction: column;
+              span { font-weight: 700; color: $dark-text; font-size: 16px; }
+              .role { font-weight: 400; color: $light-text; font-size: 14px; }
+            }
+          }
+        }
+
+        .bottom-desc {
+          margin-top: 40px; font-size: 16px; color: #334155; line-height: 1.8;
+          p { margin-bottom: 15px; }
+        }
+      }
+    }
+  }
+
+.features {
+    flex: 1.5;
+    background-color: #f8fafc; 
+    border-left: 1px solid #e2e8f0;
+    height: 100%; overflow-y: auto;
+    
+    &::-webkit-scrollbar { display: none; }
+    -ms-overflow-style: none; scrollbar-width: none;
+
+    .wrapper {
+      padding: 30px; display: flex; flex-direction: column; gap: 25px;
+
+      .title { font-weight: 800; font-size: 18px; color: $dark-text; margin-bottom: 5px; }
+
+      .listVertical {
+        background: white; border-radius: 16px; padding: 20px;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        display: flex; flex-direction: column; gap: 15px;
+
+        .feature {
+          display: flex; align-items: center; gap: 15px;
+          img { width: 24px; height: 24px; opacity: 0.8; }
+          .featureText {
+            display: flex; flex-direction: column;
+            span { font-weight: 700; font-size: 14px; color: $dark-text; }
+            p { font-size: 13px; color: $light-text; margin: 0; }
+          }
+        }
+      }
+
+      .sizes-grid {
+        display: flex; gap: 10px;
+        
+        .size-card {
+          flex: 1; background: white; padding: 15px 10px;
+          border-radius: 12px; border: 1px solid #e2e8f0;
+          display: flex; flex-direction: column; align-items: center; gap: 8px;
+          
+          img { width: 20px; }
+          span { font-size: 13px; font-weight: 600; color: $dark-text; white-space: nowrap; }
+        }
+      }
+
+      .listHorizontal {
+        display: flex; justify-content: space-between; gap: 10px;
+
+        .mini-feature {
+          flex: 1; background: white; padding: 12px;
+          border-radius: 12px; border: 1px solid #e2e8f0;
+          display: flex; align-items: center; gap: 10px;
+
+          img { width: 20px; }
+          .text {
+            span { font-size: 12px; font-weight: 700; color: $dark-text; display: block; }
+            p { font-size: 12px; color: $light-text; margin: 0; }
+          }
+        }
+      }
+
+      .mapContainer {
+        width: 100%; height: 220px; border-radius: 16px; overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+
+      .buttons {
+        display: flex; flex-direction: column; gap: 12px; margin-top: 10px;
+
+        button {
+          padding: 16px; border-radius: 12px; font-weight: 700; cursor: pointer;
+          display: flex; align-items: center; justify-content: center; gap: 10px;
+          transition: all 0.2s ease; font-size: 15px;
+          border: none;
+
+          img { width: 18px; height: 18px; }
+
+          &.primary-btn {
+            background-color: $primary-blue; color: white;
+            img { filter: invert(1); } 
+            &:hover { background-color: darken($primary-blue, 10%); }
+          }
+
+          &.secondary-btn {
+            background-color: white; border: 2px solid $primary-blue; color: $primary-blue;
+            &:hover { background-color: #eff6ff; }
+
+            &.disabled {
+              background-color: #f1f5f9; color: #94a3b8; border-color: #cbd5e1;
+              cursor: not-allowed;
+              &:hover { background-color: #f1f5f9; }
+            }
+          }
+
+          &.save-btn {
+            background-color: white; border: 1px solid #cbd5e1; color: $light-text;
+            
+            &.saved {
+              background-color: #fef9c3; border-color: #eab308; color: #a16207;
+              img { filter: none !important; } 
+            }
+            &:hover:not(.saved) { background-color: #f1f5f9; }
+          }
+        }
+
+        .owner-actions {
+          display: flex; flex-direction: column; gap: 12px; width: 100%;
+
+          .status-toggle-btn {
+            padding: 16px; border-radius: 12px; font-weight: 700; cursor: pointer;
+            font-size: 15px; border: none; transition: all 0.2s; width: 100%;
+
+            &.mark-rented {
+              background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca;
+              &:hover { background-color: #fecaca; }
+            }
+
+            &.mark-available {
+              background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0;
+              &:hover { background-color: #bbf7d0; }
+            }
+          }
+
+          .delete-btn {
+            background-color: #ef4444; color: white; border: none;
+            
+            &:hover {
+              background-color: #dc2626;
+            }
+
+            &.disabled {
+              background-color: #f3f4f6; color: #9ca3af;
+              cursor: not-allowed;
+              &:hover { background-color: #f3f4f6; }
+            }
+          }
+        }
+      }
+    }
+  }
+}

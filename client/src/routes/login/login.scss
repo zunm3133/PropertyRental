@@ -1,0 +1,140 @@
+@import "../../responsive.scss";
+
+$primary-blue: #2563eb;
+$dark-text: #1e293b;
+$light-text: #64748b;
+$light-bg: #f8fafc;
+$border-color: #e2e8f0;
+
+.login {
+  height: calc(100vh - 100px); 
+  display: flex;
+  align-items: center;     
+  justify-content: center; 
+  
+  background-color: white;
+  overflow: hidden; 
+
+  
+  .formContainer {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+
+    @include md {
+      flex: 1; 
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 400px; 
+
+      h1 {
+        font-size: 32px;
+        font-weight: 800;
+        color: $dark-text;
+        margin: 0;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: $light-text;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+
+      input {
+        padding: 15px 20px;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+        background-color: $light-bg;
+
+        &::placeholder { color: #94a3b8; }
+
+        &:focus {
+          border-color: $primary-blue;
+          background-color: white;
+          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); 
+        }
+      }
+
+      button {
+        padding: 15px;
+        border-radius: 8px;
+        border: none;
+        background-color: $primary-blue; 
+        color: white;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+
+        &:hover { background-color: darken($primary-blue, 10%); }
+        &:disabled { background-color: #93c5fd; cursor: not-allowed; }
+      }
+
+      .form-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 10px;
+
+        a {
+          font-size: 14px;
+          color: $light-text;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.2s;
+
+          &:hover { color: $primary-blue; text-decoration: underline; }
+        }
+
+        .error-msg {
+          color: #ef4444; 
+          font-size: 14px;
+          background-color: #fef2f2;
+          padding: 8px 12px;
+          border-radius: 5px;
+          width: 100%;
+          text-align: center;
+        }
+
+        .register-link {
+          font-size: 14px;
+          color: $dark-text;
+          a { color: $primary-blue; font-weight: 700; margin-left: 5px; }
+        }
+      }
+    }
+  }
+
+ 
+  .imgContainer {
+    flex: 1;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    @include md {
+      display: none; 
+    }
+
+    img {
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+}

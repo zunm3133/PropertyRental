@@ -1,0 +1,316 @@
+@import "../../responsive.scss";
+
+
+$primary-blue: #2563eb;
+$dark-text: #1e293b;
+$light-text: #64748b;
+$light-bg: #f8fafc;
+$card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+
+.profilePage {
+  display: flex;
+  height: 100%; 
+  background-color: white;
+
+  
+  @include md {
+    flex-direction: column;
+    height: auto; 
+    overflow-y: auto; 
+  }
+  
+  
+  .details {
+    flex: 3;
+    overflow-y: auto; 
+    height: 100%;
+    
+    @include md {
+        height: auto; 
+        flex: none; 
+        overflow-y: visible; 
+    }
+
+    
+    &::-webkit-scrollbar { display: none; }
+    -ms-overflow-style: none; scrollbar-width: none;
+
+    .wrapper {
+      padding: 30px 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      @include md { padding: 20px; }
+
+     
+      .tabs {
+        display: flex;
+        gap: 30px;
+        border-bottom: 2px solid #e2e8f0;
+        margin-top: 10px;
+        overflow-x: auto; 
+        padding-bottom: 2px; 
+
+        button {
+          background: none;
+          border: none;
+          padding: 12px 5px;
+          font-size: 16px;
+          color: $light-text;
+          font-weight: 600;
+          cursor: pointer;
+          border-bottom: 2px solid transparent;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+
+          &:hover {
+            color: $dark-text;
+          }
+
+          &.active {
+            color: $primary-blue;
+            border-bottom: 2px solid $primary-blue;
+          }
+        }
+      }
+
+      
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        
+        h1 {
+          font-size: 24px;
+          font-weight: 800;
+          color: $dark-text;
+        }
+
+        .create-btn {
+          padding: 10px 20px;
+          background-color: $primary-blue;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.3s;
+          
+          &:hover { background-color: darken($primary-blue, 10%); }
+        }
+      }
+      
+      
+      .userInfoCard {
+        background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: $card-shadow;
+
+        @include sm {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .avatar-section {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+
+          @include sm { flex-direction: column; }
+
+          img {
+            width: 80px; height: 80px;
+            border-radius: 50%; object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+          }
+
+          .user-text {
+            h2 { font-size: 22px; color: $dark-text; margin-bottom: 5px; }
+            p { color: $light-text; font-size: 14px; }
+          }
+        }
+
+        .action-buttons {
+          display: flex; gap: 15px;
+
+          button {
+            padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: all 0.3s;
+            &.update-btn { background-color: white; border: 1px solid $primary-blue; color: $primary-blue; }
+            &.logout-btn { background-color: #fee2e2; color: #dc2626; }
+          }
+          
+          .admin-btn {
+            background-color: #111827; 
+            color: white;
+            border: none;
+            padding: 12px 20px;       
+            border-radius: 8px;       
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;   
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: #374151; 
+              transform: translateY(-2px); 
+            }
+          }
+        }
+      }
+
+      
+      .rentalList, .maintenanceList { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 20px; 
+      }
+
+      
+      .activeLeasesList {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .lease-card {
+          display: flex;
+          background: white;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 20px;
+          align-items: center;
+          gap: 20px;
+          box-shadow: $card-shadow;
+          transition: all 0.2s ease;
+
+          &:hover { 
+            transform: translateY(-2px); 
+            border-color: $primary-blue;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          }
+
+          @include sm { 
+            flex-direction: column; 
+            align-items: flex-start; 
+          }
+
+          .lease-img {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+            
+            img { 
+              width: 100%; 
+              height: 100%; 
+              object-fit: cover; 
+              border-radius: 8px; 
+            }
+          }
+
+          .lease-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            h3 { 
+              font-size: 18px; 
+              color: $dark-text; 
+              margin: 0; 
+              font-weight: 700;
+            }
+            
+            .tenant-info {
+              font-size: 14px;
+              .label { color: $light-text; margin-right: 5px; }
+              .value { font-weight: 700; color: $dark-text; }
+            }
+
+            .lease-dates { 
+              font-size: 12px; 
+              color: $light-text; 
+              display: flex; 
+              align-items: center; 
+              gap: 5px;
+            }
+
+            .status-badge {
+              display: inline-flex;
+              align-items: center;
+              padding: 5px 12px;
+              border-radius: 20px;
+              font-size: 12px;
+              font-weight: 700;
+              width: fit-content;
+              margin-top: 5px;
+              
+              &.active { 
+                background-color: #dcfce7; 
+                color: #16a34a; 
+                border: 1px solid #bbf7d0;
+              }
+            }
+          }
+        }
+      }
+
+      
+      .empty-state { 
+        padding: 40px; 
+        text-align: center; 
+        background-color: $light-bg; 
+        border-radius: 12px; 
+        color: $light-text; 
+        font-style: italic; 
+        border: 1px dashed #cbd5e1; 
+      }
+      
+      .loading { 
+        color: $light-text; 
+        text-align: center; 
+        padding: 20px; 
+      }
+      
+      .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+    }
+  }
+
+  
+  .chatContainer {
+    flex: 2;
+    background-color: #f8fafc;
+    height: 100%;
+    border-left: 1px solid #e2e8f0;
+
+    @include md {
+      flex: none;
+      height: 600px; 
+      border-left: none;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .wrapper {
+      padding: 0 20px;
+      height: 100%;
+    }
+  }
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

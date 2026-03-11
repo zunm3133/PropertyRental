@@ -1,0 +1,177 @@
+@import "../../responsive.scss";
+
+
+$primary-blue: #2563eb;
+$dark-text: #1e293b;
+$light-text: #64748b;
+$light-bg: #f8fafc;
+$border-color: #e2e8f0;
+
+.profileUpdatePage {
+  height: 100%;
+  display: flex;
+  background-color: white;
+
+  
+  @include md {
+    flex-direction: column-reverse; 
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  
+  .formContainer {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    padding: 0 50px;
+    height: 100%;
+
+    @include md {
+      padding: 30px 20px;
+      flex: none;
+    }
+
+    .header {
+      margin-bottom: 30px;
+      h1 { font-size: 32px; font-weight: 800; color: $dark-text; margin-bottom: 5px; }
+      p { color: $light-text; font-size: 16px; }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 400px;
+
+      @include md { max-width: 100%; }
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        label {
+          font-size: 14px;
+          font-weight: 600;
+          color: $light-text;
+        }
+
+        input {
+          padding: 15px 20px;
+          border-radius: 8px;
+          border: 1px solid $border-color;
+          font-size: 16px;
+          outline: none;
+          color: $dark-text;
+          transition: all 0.3s;
+          background: white;
+
+          &:focus {
+            border-color: $primary-blue;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+          }
+        }
+      }
+
+      button {
+        padding: 15px;
+        border-radius: 8px;
+        border: none;
+        background-color: $primary-blue;
+        color: white;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.3s;
+
+        &:hover {
+          background-color: darken($primary-blue, 10%);
+        }
+
+        &:disabled {
+          background-color: #94a3b8;
+          cursor: not-allowed;
+        }
+      }
+
+      .error {
+        color: #ef4444;
+        font-size: 14px;
+        background: #fef2f2;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+      }
+    }
+  }
+
+  
+  .sideContainer {
+    flex: 2;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    @include md {
+      flex: none;
+      height: 300px; 
+      background: #f0f9ff;
+    }
+
+    .avatar-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.6); 
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
+      backdrop-filter: blur(4px);
+
+      .avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .upload-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        p {
+          font-weight: 600;
+          color: $dark-text;
+          font-size: 14px;
+        }
+
+       
+        .cloudinary-button {
+          background-color: white !important;
+          color: $primary-blue !important;
+          font-weight: 600 !important;
+          border: 1px solid $primary-blue !important;
+          border-radius: 8px !important;
+          padding: 8px 16px !important;
+          font-size: 14px !important;
+          
+          &:hover {
+            background-color: $primary-blue !important;
+            color: white !important;
+          }
+        }
+      }
+    }
+  }
+}

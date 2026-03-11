@@ -1,0 +1,223 @@
+@import "../../responsive.scss";
+
+
+$primary-blue: #2563eb;
+$dark-text: #1e293b;
+$light-text: #64748b;
+$bg-color: #f8fafc;
+$border-color: #e2e8f0;
+
+.contactPage {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+
+  
+  .headerContainer {
+    text-align: center;
+    margin-bottom: 60px;
+
+    .title {
+      font-size: 48px;
+      font-weight: 800;
+      color: $dark-text;
+      margin-bottom: 15px;
+      @include sm { font-size: 36px; }
+    }
+    .subtitle {
+      font-size: 18px;
+      color: $light-text;
+    }
+  }
+
+  
+  .contentWrapper {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start; 
+
+    @include md {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    
+    .infoSide {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 100%;
+
+      .contactCard, .hoursCard {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid $border-color;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        
+        h3 {
+          font-size: 20px;
+          margin-bottom: 20px;
+          color: $dark-text;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+
+      .contactCard {
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 15px;
+          color: $light-text;
+          font-size: 15px;
+          
+          .icon { font-size: 20px; }
+        }
+      }
+
+      .hoursCard {
+        .note { font-size: 14px; color: $light-text; margin-bottom: 15px; }
+        
+        ul {
+          list-style: none;
+          padding: 0;
+          
+          li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed $border-color;
+            font-size: 14px;
+            
+            &:last-child { border-bottom: none; }
+
+            span { color: $light-text; }
+            b { color: $dark-text; }
+            .closed { color: #ef4444; }
+          }
+        }
+      }
+    }
+
+    
+    .formSide {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      width: 100%;
+
+      
+      .faqSection {
+        h2 { margin-bottom: 25px; color: $dark-text; font-size: 28px; }
+
+        .accordion {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+
+          .faqItem {
+            background: white;
+            border: 1px solid $border-color;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+
+            .faqHeader {
+              padding: 20px;
+              cursor: pointer;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              font-weight: 600;
+              color: $dark-text;
+              background: white;
+
+              .arrow { transition: transform 0.3s; font-size: 12px; color: $light-text; }
+            }
+
+            .faqBody {
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.3s ease;
+              background-color: $bg-color;
+              
+              p { padding: 20px; color: $light-text; line-height: 1.6; margin: 0;}
+            }
+
+            
+            &.active {
+              border-color: $primary-blue;
+              box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+
+              .faqHeader {
+                color: $primary-blue;
+                .arrow { transform: rotate(180deg); color: $primary-blue; }
+              }
+              .faqBody { max-height: 200px; } 
+            }
+          }
+        }
+      }
+
+     
+      .formSection {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        border: 1px solid $border-color;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+
+        h2 { margin-bottom: 10px; color: $dark-text; font-size: 28px; }
+        
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          input, textarea {
+            padding: 15px;
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            width: 100%;
+            background-color: #f8fafc;
+
+            &:focus { 
+              border-color: $primary-blue; 
+              background-color: white;
+              box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            }
+          }
+
+          .submitBtn {
+            padding: 15px;
+            background-color: $primary-blue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+
+            &:hover { 
+              background-color: darken($primary-blue, 10%); 
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+}

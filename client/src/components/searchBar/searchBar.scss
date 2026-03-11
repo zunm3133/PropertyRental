@@ -1,0 +1,129 @@
+@import "../../responsive.scss";
+
+.searchBarContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 900px; 
+  margin: 0 auto;
+
+  
+  .tabs {
+    .tab {
+      font-size: 24px;
+      font-weight: 800;
+      color: #111;
+      padding-bottom: 5px;
+      border-bottom: 4px solid #2563eb; 
+      display: inline-block;
+    }
+  }
+
+  .search-inputs {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+    width: 100%;
+    
+    .top-inputs {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      
+      .input-box {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0 15px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        transition: all 0.2s ease;
+
+        &:focus-within {
+          border-color: #2563eb;
+          box-shadow: 0 4px 12px rgba(225, 29, 43, 0.1);
+        }
+
+        input {
+          border: none;
+          outline: none;
+          font-size: 16px;
+          width: 100%;
+          color: #333;
+          height: 100%;
+          background: transparent;
+          &::placeholder { color: #aaa; }
+          &::-webkit-outer-spin-button, &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        }
+      }
+
+      .city-box {
+        flex: 2; 
+        .icon { width: 20px; opacity: 0.5; margin-right: 10px; }
+        
+        .dropdown-menu {
+          position: absolute; top: 65px; left: 0; width: 100%;
+          background: white; border: 1px solid #eee; border-radius: 8px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 999;
+          ul { list-style: none; padding: 0; margin: 0; max-height: 200px; overflow-y: auto; }
+          li {
+            padding: 12px 15px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+            &:hover { background: #fff0f0; color: #2563eb; }
+            img { width: 16px; opacity: 0.6; }
+          }
+        }
+      }
+
+      .price-box {
+        flex: 1; 
+      }
+    }
+
+    a {
+      text-decoration: none;
+      width: 100%;
+
+      .search-btn {
+        height: 60px;
+        width: 100%; 
+        background-color: #2563eb; 
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: background 0.2s;
+        
+        span {
+          color: white;
+          font-size: 18px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        img { width: 20px; filter: brightness(0) invert(1); } 
+
+        &:hover { background-color: #0c4596; }
+      }
+    }
+  }
+
+  
+  @include md {
+    .search-inputs {
+      .top-inputs {
+        flex-direction: column; 
+        
+        .city-box, .price-box {
+          width: 100%;
+          flex: none; 
+        }
+      }
+    }
+  }
+}

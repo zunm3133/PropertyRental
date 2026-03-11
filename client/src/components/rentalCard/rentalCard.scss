@@ -1,0 +1,343 @@
+@import "../../responsive.scss";
+
+$primary-blue: #2563eb;
+$success-green: #16a34a;
+$warning-yellow: #ca8a04;
+$danger-red: #dc2626;
+
+
+.custom-modal-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  z-index: 10000; 
+
+  .custom-modal {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    min-width: 320px;
+    max-width: 400px;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    p {
+      font-size: 16px; 
+      color: #333; 
+      margin-bottom: 25px;
+      font-weight: 500; 
+      line-height: 1.5; 
+      white-space: pre-wrap;
+    }
+
+    .modal-actions {
+      display: flex; 
+      gap: 15px; 
+      justify-content: center;
+
+      button {
+        padding: 10px 24px; 
+        font-size: 15px; 
+        font-weight: bold;
+        border-radius: 8px; 
+        border: none; 
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &.ok-btn, &.confirm-btn {
+          background-color: $primary-blue; 
+          color: white;
+          &:hover { background-color: darken($primary-blue, 10%); }
+        }
+
+        &.cancel-btn {
+          background-color: #f1f5f9; 
+          color: #1e293b;
+          &:hover { background-color: #e2e8f0; }
+        }
+      }
+    }
+  }
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+
+
+.rentalCard {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  .card-content {
+    padding: 24px;
+
+    
+    .header {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+
+      @include sm { flex-direction: column; }
+
+      .image-wrapper {
+        width: 120px;
+        height: 80px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+
+        img { width: 100%; height: 100%; object-fit: cover; }
+      }
+
+      .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .post-title h3 {
+          font-size: 18px;
+          color: #1e293b;
+          margin: 0 0 8px 0;
+          &:hover { color: $primary-blue; }
+        }
+
+        .status-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+
+          .rent-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+          }
+        }
+
+        .status-pill {
+          display: inline-block;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 700;
+          width: fit-content;
+          text-transform: uppercase;
+
+          &.pending { background: #fef9c3; color: $warning-yellow; }
+          &.awaiting_signature { background: #e0f2fe; color: $primary-blue; }
+          &.ready_for_review { background: #f3e8ff; color: #9333ea; }
+          &.accepted { background: #dcfce7; color: $success-green; }
+          &.rejected { background: #fee2e2; color: $danger-red; }
+        }
+      }
+    }
+
+    
+    .user-info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background-color: #f8fafc; 
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #e2e8f0;
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        img {
+          width: 40px; height: 40px;
+          border-radius: 50%; object-fit: cover;
+          border: 1px solid white;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .user-text {
+          display: flex; flex-direction: column;
+          
+          .label {
+            font-size: 10px; color: #64748b;
+            text-transform: uppercase; font-weight: 700;
+            letter-spacing: 0.5px;
+          }
+          .name { font-size: 14px; font-weight: 600; color: #1e293b; }
+        }
+      }
+
+      .chat-btn {
+        width: 36px; height: 36px;
+        border-radius: 50%; background-color: white;
+        border: 1px solid #e2e8f0;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s;
+        img { width: 18px; height: 18px; }
+        &:hover { background-color: #eff6ff; border-color: $primary-blue; transform: scale(1.05); }
+      }
+    }
+
+    
+    .action-panel {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 20px;
+
+      .step-content {
+        display: flex; flex-direction: column; gap: 15px;
+
+        .instruction { font-size: 14px; color: #334155; margin: 0; font-weight: 600; }
+        .waiting-text { font-size: 14px; color: #64748b; font-style: italic; }
+        
+        .waiting-state {
+          background: #f8fafc; padding: 15px; border-radius: 8px; text-align: center;
+          small { display: block; margin-top: 5px; color: #94a3b8; }
+        }
+
+        
+        .btn-group { 
+            display: flex; 
+            gap: 15px; 
+            flex-wrap: wrap; 
+            align-items: center; 
+        }
+        
+        .btn {
+          padding: 0 24px; 
+          height: 45px;    
+          border-radius: 8px; 
+          font-weight: 600; 
+          font-size: 14px; 
+          border: none; 
+          cursor: pointer; 
+          transition: 0.2s;
+          display: flex; align-items: center; justify-content: center;
+
+          &.primary-btn { 
+            background: $primary-blue; color: white; 
+            &:hover { background: darken($primary-blue, 10%); } 
+          }
+          
+          &.secondary-btn { 
+             background: #e2e8f0; color: #334155; text-decoration: none; 
+             &:hover { background: #cbd5e1; } 
+          }
+          
+          &.reject-btn { 
+             background: #fee2e2; color: $danger-red; 
+             &:hover { background: #fecaca; } 
+          }
+          
+          &.outline-btn { 
+             background: transparent; border: 1px solid $primary-blue; color: $primary-blue; 
+             &.danger { border-color: $danger-red; color: $danger-red; &:hover { background: #fef2f2; } }
+             &:hover { background: #eff6ff; } 
+          }
+          
+          &.full-width { width: 100%; }
+        }
+
+       
+        .date-picker-group {
+          background: #f8fafc; padding: 15px; border-radius: 8px;
+          border: 1px solid #e2e8f0;
+
+          label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: #475569; }
+          
+          .inputs {
+            display: flex; align-items: center; gap: 10px;
+            
+            
+            flex-wrap: wrap; 
+            
+            input { 
+              padding: 10px 12px; 
+              border: 1px solid #cbd5e1; 
+              border-radius: 6px; 
+              outline: none;
+              font-size: 14px;
+              color: #334155;
+              transition: border 0.2s;
+              flex: 1; 
+
+              &:focus { border-color: $primary-blue; }
+            }
+          }
+        }
+
+        
+        .lease-dates-preview {
+          background: #f0f9ff; color: $primary-blue;
+          padding: 12px; border-radius: 6px; font-weight: 600; font-size: 14px;
+          text-align: center; border: 1px solid #bae6fd;
+        }
+
+        .doc-preview {
+          background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;
+          .doc-link { 
+            color: $primary-blue; font-weight: 600; text-decoration: underline; 
+            font-size: 15px; display: flex; align-items: center; gap: 8px; 
+          }
+        }
+
+        .upload-wrapper {
+          display: flex; align-items: center; gap: 15px;
+          background: #f8fafc; padding: 5px 15px; border-radius: 8px; 
+          border: 1px dashed #cbd5e1;
+        }
+
+        
+        &.active-deal {
+          .success-banner {
+            background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534;
+            padding: 10px; border-radius: 6px; font-weight: 600; 
+            display: flex; align-items: center; gap: 8px;
+            .check { 
+              background: #166534; color: white; border-radius: 50%; 
+              width: 18px; height: 18px; display: flex; align-items: center; 
+              justify-content: center; font-size: 10px; 
+            }
+          }
+
+          .lease-info-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+            margin-top: 10px; padding: 15px; background: #f8fafc; border-radius: 8px;
+
+            .info-item {
+              display: flex; flex-direction: column; gap: 4px;
+              label { font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700; }
+              span { font-size: 14px; font-weight: 600; color: #334155; }
+              a { font-size: 14px; color: $primary-blue; font-weight: 600; text-decoration: underline; }
+              
+              &.full { grid-column: span 2; margin-top: 5px; }
+            }
+          }
+          
+          .payment-wrapper { margin-top: 15px; }
+        }
+
+        
+        .success-banner.completed {
+            background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1;
+        }
+        
+        .error-msg { margin-top: 10px; font-size: 13px; color: $danger-red; background: #fef2f2; padding: 8px; border-radius: 4px; }
+      }
+    }
+  }
+}

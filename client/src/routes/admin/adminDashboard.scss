@@ -1,0 +1,465 @@
+@import "../../responsive.scss";
+
+
+$primary-color: #2563eb;       
+$danger-color: #dc2626;        
+$danger-bg: #fee2e2;
+$success-color: #166534;       
+$success-bg: #dcfce7;
+$warning-color: #ca8a04;       
+$gray-text: #4b5563;
+$light-bg: #f9fafb;
+$border-color: #e5e7eb;
+
+.custom-modal-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  z-index: 10000;
+
+  .custom-modal {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    min-width: 320px;
+    max-width: 400px;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    p {
+      font-size: 16px; 
+      color: #333; 
+      margin-bottom: 25px;
+      font-weight: 500; 
+      line-height: 1.5; 
+      white-space: pre-wrap;
+    }
+
+    .modal-actions {
+      display: flex; 
+      gap: 15px; 
+      justify-content: center;
+
+      button {
+        padding: 10px 24px; 
+        font-size: 15px; 
+        font-weight: bold;
+        border-radius: 8px; 
+        border: none; 
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &.ok-btn, &.confirm-btn {
+          background-color: #2563eb; 
+          color: white;
+          &:hover { background-color: darken(#2563eb, 10%); }
+        }
+
+        &.cancel-btn {
+          background-color: #f1f5f9; 
+          color: #1e293b;
+          &:hover { background-color: #e2e8f0; }
+        }
+      }
+    }
+  }
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.adminDashboard {
+  padding: 20px 50px;
+  height: auto;
+  min-height: 100vh;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: $light-bg;
+
+  @include md {
+    padding: 20px;
+  }
+
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include sm {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .headerActions {
+      display: flex;
+      gap: 15px;
+
+      input {
+        padding: 10px 15px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        width: 250px;
+        outline: none;
+        transition: border 0.2s;
+
+        &:focus {
+          border-color: $primary-color;
+        }
+      }
+
+      .addBtn {
+        padding: 10px 20px;
+        background-color: #111827;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: #374151;
+        }
+      }
+    }
+  }
+
+  
+  .statsContainer {
+    display: flex;
+    gap: 20px;
+    
+    @include sm {
+      flex-direction: column;
+    }
+
+    .statCard {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid $border-color;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      h3 {
+        font-size: 14px;
+        color: $gray-text;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .number {
+        font-size: 36px;
+        font-weight: 800;
+        color: #111827;
+        margin: 5px 0;
+
+        &.warning { color: $warning-color; }
+        &.error { color: $danger-color; }
+      }
+
+      .subtitle {
+        font-size: 13px;
+        color: #9ca3af;
+      }
+
+      
+      .occupancyInfo {
+        .chart {
+          width: 100%;
+          height: 8px;
+          background-color: #e5e7eb;
+          border-radius: 4px;
+          margin-bottom: 10px;
+          overflow: hidden;
+
+          .bar {
+            height: 100%;
+            background-color: $primary-color;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  
+  .createFormContainer {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid $border-color;
+    animation: fadeIn 0.3s ease;
+
+    form {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+
+      input {
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        flex: 1;
+        min-width: 150px;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: $success-color;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        
+        &:hover { background-color: darken($success-color, 5%); }
+      }
+    }
+  }
+
+  
+  .editModalOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .editModal {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      h2 { margin: 0; }
+
+      form {
+        display: flex; flex-direction: column; gap: 15px;
+
+        label { font-size: 14px; font-weight: 600; color: $gray-text; }
+        input { padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; }
+        
+        .checkboxContainer {
+          display: flex; align-items: center; gap: 10px;
+          input { width: auto; }
+        }
+
+        .modalActions {
+          display: flex; gap: 10px;
+          margin-top: 10px;
+
+          button {
+            flex: 1; padding: 10px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600;
+          }
+          .saveBtn { background-color: $primary-color; color: white; }
+          .cancelBtn { background-color: #e5e7eb; color: #374151; }
+        }
+      }
+    }
+  }
+
+  
+  .tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 10px;
+    overflow-x: auto; 
+
+    button {
+      background: none;
+      border: none;
+      padding: 8px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: $gray-text;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #f3f4f6;
+        color: #111827;
+      }
+
+      &.active {
+        background-color: #111827;
+        color: white;
+      }
+    }
+  }
+
+ 
+  .tableContainer {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid $border-color;
+    overflow-x: auto; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+    .dataTable {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+
+      tr {
+        border-bottom: 1px solid $border-color;
+      }
+
+      tr:last-child {
+        border-bottom: none;
+      }
+
+      th, td {
+        padding: 15px 20px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f9fafb;
+        font-weight: 600;
+        color: $gray-text;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        color: #1f2937;
+        font-size: 14px;
+        vertical-align: middle;
+      }
+
+      
+      .userCell {
+        display: flex;
+        flex-direction: column;
+        
+        .name { font-weight: 600; }
+        .email { font-size: 12px; color: #6b7280; }
+      }
+
+      
+      .messageCell {
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        p { margin: 0; }
+      }
+
+     
+      .statusSelect {
+        padding: 5px 10px;
+        border-radius: 20px;
+        border: 1px solid transparent;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+
+        &.pending { background-color: #fef3c7; color: #b45309; }
+        &.in_progress { background-color: #dbeafe; color: #1e40af; }
+        &.completed { background-color: #dcfce7; color: #166534; }
+      }
+
+     
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: capitalize;
+
+        &.admin { background-color: #e0e7ff; color: #3730a3; }
+        &.user { background-color: #f3f4f6; color: #374151; }
+        &.available, &.active { background-color: $success-bg; color: $success-color; }
+        &.rented, &.restricted { background-color: $danger-bg; color: $danger-color; }
+      }
+
+      
+      .actionsCell {
+        vertical-align: middle;
+        white-space: nowrap;
+
+        button {
+          padding: 6px 12px;
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          border: 1px solid transparent;
+          transition: opacity 0.2s;
+          margin-right: 8px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          &:hover { opacity: 0.8; }
+        }
+
+        .deleteBtn {
+          background-color: #fee2e2;
+          color: #b91c1c;
+        }
+
+        .editBtn {
+          background-color: #eff6ff;
+          color: #1d4ed8;
+        }
+
+        .roleBtn {
+          &.promote { background-color: #dbeafe; color: #1e40af; }
+          &.demote { background-color: #ffedd5; color: #c2410c; }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

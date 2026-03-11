@@ -1,0 +1,124 @@
+@import "../../responsive.scss";
+
+
+$primary-blue: #2563eb;
+$border-color: #e2e8f0;
+$text-dark: #1e293b;
+$text-light: #64748b;
+
+
+$pending-color: #f59e0b; 
+$success-color: #10b981; 
+$error-color: #ef4444;   
+$neutral-color: #3b82f6; 
+
+.requestList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+
+  .empty-state {
+    padding: 30px;
+    text-align: center;
+    color: $text-light;
+    font-style: italic;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px dashed $border-color;
+  }
+
+  .requestItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid $border-color;
+    border-left-width: 5px; 
+    transition: all 0.3s ease;
+
+    
+    &.pending { border-left-color: $pending-color; }
+    &.accepted { border-left-color: $success-color; }
+    &.denied { border-left-color: $error-color; }
+    &.in-progress { border-left-color: $neutral-color; }
+
+    &:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      .icon {
+        width: 40px; height: 40px;
+        background-color: #f1f5f9;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: $text-dark;
+      }
+
+      .text-content {
+        display: flex; flex-direction: column;
+        
+        .id-label {
+          font-weight: 700;
+          color: $text-dark;
+          font-size: 15px;
+        }
+
+        .status-label {
+          font-size: 13px;
+          color: $text-light;
+          text-transform: capitalize;
+          
+          b { color: $primary-blue; }
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+
+      @include mobile { width: 100%; }
+
+      button {
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+
+        @include mobile { flex: 1; }
+
+        &.accept-btn {
+          background-color: $primary-blue;
+          color: white;
+          &:hover { background-color: darken($primary-blue, 10%); }
+        }
+
+        &.deny-btn {
+          background-color: white;
+          border-color: $error-color;
+          color: $error-color;
+          &:hover { background-color: #fef2f2; }
+        }
+      }
+    }
+  }
+}

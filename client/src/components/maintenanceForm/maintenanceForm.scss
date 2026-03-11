@@ -1,0 +1,139 @@
+@import "../../responsive.scss";
+
+
+$primary-blue: #2563eb;
+$light-blue-bg: #eff6ff;
+$dark-text: #1e293b;
+$light-text: #64748b;
+$border-color: #e2e8f0;
+
+.maintenanceForm {
+  margin-top: 30px;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: $primary-blue;
+  }
+
+  
+  .ticket-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+
+    .icon-circle {
+      width: 40px; height: 40px;
+      background: $primary-blue;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+      
+      svg { width: 20px; height: 20px; }
+    }
+
+    .text {
+      h3 { font-size: 16px; font-weight: 700; color: $dark-text; margin: 0; }
+      p { font-size: 13px; color: $light-text; margin: 2px 0 0 0; }
+    }
+  }
+
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .input-group {
+      position: relative;
+      
+      textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 15px;
+        border: 1px solid $border-color;
+        border-radius: 12px;
+        background-color: white;
+        font-family: inherit;
+        font-size: 14px;
+        color: $dark-text;
+        outline: none;
+        resize: vertical;
+        transition: all 0.3s ease;
+
+        &::placeholder { color: #94a3b8; }
+
+        &:focus {
+          border-color: $primary-blue;
+          box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+          background-color: #fbfdff;
+        }
+      }
+    }
+
+    button {
+      padding: 12px;
+      background-color: $dark-text; 
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex; justify-content: center; align-items: center;
+
+      &:hover {
+        background-color: $primary-blue; 
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+      }
+
+      &.loading {
+        background-color: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+
+  
+  .status-msg {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    display: flex; align-items: center; gap: 8px;
+    animation: fadeIn 0.3s ease;
+
+    span { font-weight: bold; font-size: 16px; }
+
+    &.success {
+      background-color: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      span { color: #16a34a; }
+    }
+
+    &.error {
+      background-color: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      span { color: #ef4444; }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

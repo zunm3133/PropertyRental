@@ -1,0 +1,56 @@
+@import "../../responsive.scss";
+
+$primary-blue: #2563eb;
+$dark-text: #1e293b;
+$light-text: #64748b;
+$light-bg: #f8fafc;
+$border-color: #e2e8f0;
+
+.listPage {
+  
+  min-height: 100vh; 
+  
+  display: flex;
+  background-color: white;
+
+  .listContainer {
+    flex: 3;
+    background-color: white;
+    padding-bottom: 50px;
+
+    .wrapper {
+      padding: 30px 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      
+      @include lg { padding: 20px; }
+      @include sm { padding: 20px 10px; }
+
+      .loading {
+         text-align: center;
+         color: $light-text;
+         padding: 50px;
+      }
+      
+      .results-grid {
+         display: flex;
+         flex-direction: column;
+         gap: 30px;
+      }
+    }
+  }
+
+  .mapContainer {
+    flex: 2;
+    height: 100vh; 
+    
+    background-color: #fcf5f3; 
+    position: sticky;
+    top: 0; 
+
+    @include md {
+      display: none; 
+    }
+  }
+}
