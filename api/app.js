@@ -13,6 +13,7 @@ import rentalRoute from "./routes/rental.route.js";
 import feedbackRoute from "./routes/feedback.route.js";
 
 const app = express();
+app.use(cookieParser());
 app.set("trust proxy", 1); 
 
 app.use(cors({ 
