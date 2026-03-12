@@ -57,7 +57,7 @@ export const forgotPassword = async (req, res) => {
       },
     });
 
-    const resetUrl = `http://localhost:5173/reset-password?token=${resetToken}&id=${user.id}`;
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${resetToken}&id=${user.id}`;
 
     const mailOptions = {
       from: "PRMS Support <support@prms.com>",
@@ -163,5 +163,9 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("token").status(200).json({ message: "Logout Successful" });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  }).status(200).json({ message: "Logout Successful" });
 };
